@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: #f0f0f0;
+      }
+      .key {
+        display: inline-block;
+        padding: 10px 15px;
+        margin: 5px;
+        background: #fff;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+      .active {
+        background: #4caf50;
+        color: white;
+        border-color: #45a049;
+      }
+      #status {
+        margin-top: 20px;
+        padding: 15px;
+        background: #e7f3ff;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Flight Simulator Control Test</h1>
+    <p>Press the keys below to test if they're being detected:</p>
+
+    <div>
+      <span class="key" id="w">W</span>
+      <span class="key" id="s">S</span>
+      <span class="key" id="a">A</span>
+      <span class="key" id="d">D</span>
+      <span class="key" id="q">Q</span>
+      <span class="key" id="e">E</span>
+      <span class="key" id="arrowup">↑</span>
+      <span class="key" id="arrowdown">↓</span>
+    </div>
+
+    <div id="status">
+      <strong>Status:</strong>
+      <span id="status-text">Waiting for key presses...</span>
+    </div>
+
+    <div id="last-key">
+      <strong>Last Key Pressed:</strong> <span id="last-key-text">None</span>
+    </div>
+
+    <script>
+      const keys = {
+        w: false,
+        s: false,
+        a: false,
+        d: false,
+        q: false,
+        e: false,
+        arrowup: false,
+        arrowdown: false,
+      };
+
+      window.addEventListener("keydown", (e) => {
+        const key = e.key.toLowerCase();
+        if (keys.hasOwnProperty(key)) {
+          keys[key] = true;
+          document.getElementById(key).classList.add("active");
+          document.getElementById("last-key-text").textContent =
+            key.toUpperCase();
+          updateStatus();
+        }
+      });
+
+      window.addEventListener("keyup", (e) => {
+        const key = e.key.toLowerCase();
+        if (keys.hasOwnProperty(key)) {
+          keys[key] = false;
+          document.getElementById(key).classList.remove("active");
+          updateStatus();
+        }
+      });
+
+      function updateStatus() {
+        const activeKeys = Object.keys(keys).filter((key) => keys[key]);
+        const statusText =
+          activeKeys.length > 0
+            ? `Active keys: ${activeKeys.join(", ")}`
+            : "No keys pressed";
+        document.getElementById("status-text").textContent = statusText;
+      }
+
+      // Focus the window to ensure key events are captured
+      window.focus();
+    </script>
+  </body>
+</html>
