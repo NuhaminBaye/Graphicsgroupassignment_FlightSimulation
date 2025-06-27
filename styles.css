@@ -79,3 +79,98 @@ body {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
+#speed, #altitude {
+  font-size: 16px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#speed:last-child, #altitude:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+#speedValue, #altitudeValue {
+  font-weight: bold;
+  color: #4ecdc4;
+  font-size: 18px;
+}
+
+#features {
+  margin-top: 20px;
+}
+
+#features h3 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #4ecdc4;
+  border-bottom: 2px solid #4ecdc4;
+  padding-bottom: 5px;
+}
+
+#features ul {
+  list-style: none;
+  padding: 0;
+}
+
+#features li {
+  font-size: 14px;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  border-left: 3px solid #4ecdc4;
+  transition: all 0.3s ease;
+}
+
+#features li:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  #info {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    max-width: none;
+    padding: 20px;
+  }
+  
+  .control-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .control-row span {
+    text-align: left;
+  }
+  
+  #speed, #altitude {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}
+
+/* Animation for smooth transitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#info {
+  animation: fadeIn 0.8s ease-out;
+}
